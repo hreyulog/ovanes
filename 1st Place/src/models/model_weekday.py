@@ -33,7 +33,7 @@ def extract_features(df,weather):
     df['dayofyear'] = df.index.dayofyear
     df['dayofmonth'] = df.index.day
     df['dayofweek'] = df.index.weekday
-    df['temperature'] = weather.loc[df.index].fillna(method='ffill')
+    df['temperature'] = weather.reindex(df.index).fillna(method='ffill')
     df['is_off'] = df.index.weekday > 4
     df['is_pre_off'] = (df.index.weekday == 0) |  (df.index.weekday == 6)
     df['is_next_off'] = (df.index.weekday == 4) | (df.index.weekday == 5)
